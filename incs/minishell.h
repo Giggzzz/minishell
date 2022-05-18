@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/17 11:56:03 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/18 11:15:59 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <signal.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <dirent.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <dirent.h>
+# include <termios.h>
 /* ************************************************************************** */
 
 typedef struct s_quote_info
@@ -192,5 +193,8 @@ int		manage_perror(char *remark, int error_code);
 
 // -------------------------------------------------------------------
 void	restore_config(t_vars *vars);
+
+// void	print_termios_attributes(struct termios *ta);
+void	print_termios_attributes(struct termios ta);
 /* ************************************************************************** */
 #endif

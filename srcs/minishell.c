@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:15:58 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/17 11:17:44 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/18 14:04:41 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int	main(int argc, char **argv, char **envp)
 	char	**segments;
 	int		i;
 
+	struct termios ta;
+
+
 	//------------------------------------
 	(void)argv;
 	if (argc > 1)
@@ -36,6 +39,14 @@ int	main(int argc, char **argv, char **envp)
 		exit_msg(ERR_TTY);
 	
 	initialisation (&vars, envp);
+
+	tcgetattr(0, &ta);
+	print_termios_attributes(ta);
+	printf("NOFLSH = %x\n", NOFLSH);
+	ta.c_lflag |= NOFLSH;
+	print_termios_attributes(ta);
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &ta);
+		
 	
 	//------------------------------------
 	struct termios attributes;

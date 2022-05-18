@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/17 11:31:08 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/18 11:09:44 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,18 @@ static void init_sigaction_main(t_sig *s)
 
 /* ************************************************************************** */
 void	handler_signal_main(int sig_code)
-{
+{	
 	if (sig_code == SIGINT)
 	{
+		write(0, "\25", 1);
+		write(0, "\4", 1);
 		write(1, MSG_SIGINT_MAIN, ft_strlen(MSG_SIGINT_MAIN));
 		update_var(&vars.loc, "?", "1");
+
+		
+		// write(1, "\n", 1);
+		
+
 		
 		// int tmp = dup(0);
 		// dup2 (tmp, 0);
