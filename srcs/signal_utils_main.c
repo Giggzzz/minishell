@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/05/18 15:57:40 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/19 14:36:10 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 extern t_vars g_vars;
 
+/* ************************************************************************** */
+// # define MSG_SIGINT_MAIN	RED"\nminishell> "DEFAULT
+# define MSG_SIGINT_MAIN	"\n"
+# define MSG_SIGQUIT_MAIN	""
 /* ************************************************************************** */
 static void init_struc_sa_main(t_sig *s);
 static void init_sigaction_main(t_sig *s);
@@ -30,9 +34,9 @@ static void init_struc_sa_main(t_sig *s)
 {		
 	// SIGINT -----------------------------------------	
 	s->sa_sigint.sa_handler = &handler_signal_main;	// SA_HANDLER	
-	sigemptyset(&s->sa_sigint.sa_mask);				// SA_MASK
-	sigaddset(&s->sa_sigint.sa_mask, SIGINT);			// -
-	sigaddset(&s->sa_sigint.sa_mask, SIGQUIT);			// -	
+	// sigemptyset(&s->sa_sigint.sa_mask);				// SA_MASK
+	// sigaddset(&s->sa_sigint.sa_mask, SIGINT);			// -
+	// sigaddset(&s->sa_sigint.sa_mask, SIGQUIT);			// -	
 	s->sa_sigint.sa_flags = SA_RESTART;				// SA_FLAG
 	
 	// SIGQUIT -----------------------------------------	
@@ -61,6 +65,11 @@ void	handler_signal_main(int sig_code)
 	if (sig_code == SIGINT)
 	{
 		write(1, MSG_SIGINT_MAIN, ft_strlen(MSG_SIGINT_MAIN));
+		rl_replace_line("", 0);
+
+
+
+		
 		update_var(&g_vars.loc, "?", "1");
 		
 		// int tmp = dup(0);

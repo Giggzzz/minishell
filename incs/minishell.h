@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/18 18:25:47 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/19 14:27:04 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <signal.h>
-#include <sys/types.h>
-#include <dirent.h>
-#include <termios.h>
+# include <sys/types.h>
+# include <dirent.h>
+# include <termios.h>
+// # include <sys/types.h>
+// # include <sys/stat.h>
 /* ************************************************************************** */
 
 typedef struct s_quote_info
@@ -78,13 +80,6 @@ typedef struct	s_vars
 	t_sig	sig;
 	int		segments_count;
 }	t_vars;
-/* ************************************************************************** */
-# define MSG_SIGINT_MAIN	RED"\nminishell> "DEFAULT
-# define MSG_SIGQUIT_MAIN	""
-// -------------------------------------------------------------
-# define MSG_SIGINT_FORK_PARENT		"\n"
-# define MSG_SIGQUIT_FORK_PARENT	""
-# define MSG_SIGCHLD_FORK_PARENT	"SIGCHLD received by the fork-parent\n"
 /* ************************************************************************** */
 void	init_signal_main(t_sig *s);
 void	handler_signal_main(int sig_code);
@@ -191,5 +186,9 @@ void	exit_msg(char *msg);
 int		manage_perror(char *remark, int error_code); 
 
 void	clean_program(t_vars *vars);
+
+
+
+void print_termios_attributes(struct termios ta);
 // -------------------------------------------------------------------
 #endif
