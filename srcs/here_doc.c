@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 14:11:34 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 16:52:57 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/24 16:40:23 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ static void	pipe_input(char *limiter, int pipe_fd[2])
 		if (rd_line[limiter_len] == '\n' && \
 			!ft_strncmp(limiter, rd_line, limiter_len))
 		{
-			free(rd_line);
+			ft_free_null(&rd_line);
 			close(pipe_fd[1]);
 			exit(0);
 		}
 		write(pipe_fd[1], rd_line, ft_strlen(rd_line));
-		free(rd_line);
+		ft_free_null(&rd_line);
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assignations.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:29:32 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 16:39:41 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/24 16:39:36 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static int	is_assignation(char *cmd)
 		name = ft_substr(cmd, 0, equal - cmd);
 		if (name_is_valid(name))
 		{
-			free(name);
+			ft_free_null(&name);
 			return (1);
 		}
-		free(name);
+		ft_free_null(&name);
 	}
 	return (0);
 }
@@ -49,8 +49,8 @@ static int	add_local_var(t_vars *vars, char **cmd_args)
 			update_var(&vars->loc, name, data);
 			if (does_var_exist(vars->env, name))
 				update_var(&vars->env, name, data);
-			free(name);
-			free(data);
+			ft_free_null(&name);
+			ft_free_null(&data);
 		}
 		i++;
 	}
@@ -77,6 +77,20 @@ int	check_assignations(t_vars *vars, t_cmd *cmd)
 	}
 	return (i);
 }
+
+	// i = 0;
+	// if (cmd_args[i] && is_assignation(cmd_args[i]))
+	// {
+	// 	while (cmd_args[++i])
+	// 	{
+	// 		if (!is_assignation(cmd_args[i]))
+	// 			break ;
+	// 	}
+
+	// 	translate_dollars_all(cmd_args, vars);
+	// 	if (!cmd_args[i] && vars->segments_count == 1)
+	// 		return_code = add_local_var(vars, cmd_args);
+	// }
 
 int	name_is_valid(char *name)
 {

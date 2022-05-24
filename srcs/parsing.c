@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/24 15:38:19 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/24 16:31:59 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	update_return_code(t_vars *vars, int return_code)
 
 	buff = ft_itoa(return_code);
 	update_var(&vars->loc, "?", buff);
-	ft_free_null((void **)&buff);
+	ft_free_null(&buff);
 }
 
 void	handle_segments(t_vars *vars, char **segments)
@@ -40,17 +40,31 @@ void	parse_line(t_vars *vars, char *line, int output)
 	int			i;
 	int			return_code;
 
-	return_code = 0;
-	cmd.args = split_shell_line(line, ' ');
-	if (!(cmd.args) || !(cmd.args[0]))
-		return ;
-	get_redirections(vars, &cmd);
-	if (!cmd.fd_out)
-		cmd.fd_out = output;
+	return_code = 0; // ski: different 
+	
+	cmd.args = split_shell_line(line, ' '); // ski: OK
+
+	//different, ici: translate_dollars_all
+	
+	if (!(cmd.args) || !(cmd.args[0])) // ski: OK 
+		return ; // ski: OK
+		
+		
+	get_redirections(vars, &cmd);  // ski: OK
+	
+	if (!cmd.fd_out) // ski: different 
+		cmd.fd_out = output; // ski: different 
+		
 	i = check_assignations(vars, &cmd);
+
 	return_code = execute_cmd(vars, &cmd, i);
+
 	update_return_code(vars, return_code);
+
 	init_signal_main(&vars->sig);
+
 	reset_redirections(vars, &cmd);
+	
 	free_array_null(&cmd.args);
+	
 }

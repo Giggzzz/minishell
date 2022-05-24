@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:10:05 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/23 17:25:45 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/24 16:40:30 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*get_prompt_line(t_env *env)
 			prompt_line = ft_strdup(dir + ft_strlen(home));
 			tmp = prompt_line;
 			prompt_line = ft_strjoin(CYAN"~", prompt_line);
-			free(tmp);
+			ft_free_null(&tmp);
 		}
 		else
 			prompt_line = ft_strjoin(CYAN, dir);
@@ -36,7 +36,7 @@ static char	*get_prompt_line(t_env *env)
 		prompt_line = ft_strdup(RED"minishell");
 	tmp = prompt_line;
 	prompt_line = ft_strjoin(prompt_line, " > "DEFAULT);
-	free(tmp);
+	ft_free_null(&tmp);
 	return (prompt_line);
 }
 
@@ -47,7 +47,7 @@ char	*show_prompt(t_vars *vars)
 
 	prompt_line = get_prompt_line(vars->env);
 	new_line = readline(prompt_line);
-	free(prompt_line);
+	ft_free_null(&prompt_line);
 	return (new_line);
 }
 
