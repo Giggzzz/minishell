@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/24 14:47:15 by gudias           ###   ########.fr       */
+/*   Updated: 2022/05/24 15:15:14 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ void	parse_line(t_vars *vars, char *line, int output)
 	update_return_code(vars, return_code);
 	init_signal_main(&vars->sig);
 	reset_redirections(vars, &cmd);
-	free_array(cmd.args);
+	// free_array(cmd.args);
+	free_array_null(&cmd.args);
 }

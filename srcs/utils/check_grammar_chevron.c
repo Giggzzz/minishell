@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:10:05 by ski               #+#    #+#             */
-/*   Updated: 2022/05/23 16:21:09 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/24 15:16:01 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ bool	is_grammar_chevron_correct(char *line, t_vars *vars)
 	if (!is_token_chevron_correct(array, vars)
 		|| !is_next_token_correct(array, vars))
 		return (false);
-	free_array(array);
+	// free_array(array);
+	free_array_null(&array);
 	return (true);
 }
 
