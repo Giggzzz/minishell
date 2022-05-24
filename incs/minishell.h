@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/24 15:14:35 by ski              ###   ########.fr       */
+/*   Updated: 2022/05/24 15:38:09 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ void	free_var_list(t_env **var_head);
 // ----------------------------------------------------- array_utils.c
 char	**conv_list_to_array(t_env *var_head);
 void	print_array(char **array);
-void	free_array(char **array);
 void	free_array_null(char ***array);
 // -------------------------------------------------------------------
 char	**split_shell_line(char *line, char separator);
